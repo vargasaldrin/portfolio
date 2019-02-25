@@ -2,17 +2,47 @@
     font-family: $font3
     font-size: 3rem
 
-.boxes
-    background-color: black
+.boxContainer
     color: white
     padding: 2px
     border: 2px solid white
+    overflow: hidden
+    height: 700px
+    @media (max-width: 576px)
+        height: auto
+        border: none
 
-#about, #htmlcss, #javascript, #webtech
+
+.box1
+    background-color: black
+    position: relative
+    color: white
     height: 700px
     display: flex
     align-items: center
     justify-content: center
+    @media (max-width: 576px)
+        display: none
+    
+.box2
+    height: 700px
+    position: relative
+    background-color: white
+    color: black
+    font-size: 4rem
+    width: 100%
+    h2 
+        font-family: $font1
+    p 
+        font-family: $font2
+        font-size: 2rem
+    @media (max-width: 576px)
+        padding: 10px 0px
+        background-color: black
+        color: white
+        height: auto
 
-.projects
-    height: 300px
+#about2
+    p 
+        display: flex
+        align-items: center

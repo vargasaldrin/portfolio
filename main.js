@@ -1,4 +1,4 @@
-
+/***  Variables ***/
 const speed = 100;
 const main = document.getElementById('main_content');
 const about = document.getElementById('about');
@@ -6,6 +6,9 @@ const htmlcss = document.getElementById('htmlcss');
 const jscript = document.getElementById('javascript');
 const webtech = document.getElementById('webtech');
 const description = document.getElementById('description');
+const slideDown = document.getElementById('slideDown');
+const mq = window.matchMedia("(max-width: 576px");
+const closing = document.getElementsByClassName('fa-times');
 const list = [
     'Front-End Developer',
     'Programmer',
@@ -16,131 +19,189 @@ const list = [
     'Funny Man',
     ':)'
 ]
+const mediaSize = window.matchMedia("(max-width: 576px");
 
-// Functions //
-inserter = (event) => {
-    const txt = event.target.title.toString();
-    let i = 0;
-    event.target.innerHTML = null;
+/***  Functions ***/
 
-    again = () => {
-        if (i < txt.length) {
-          event.target.innerHTML += txt.charAt(i) ;
-          i++;
-          setTimeout(again, speed);
-        };
-    };
-    again();
+
+
+inserter = (e) => {
+    const txt = e.target.title.toString();
+    e.target.innerHTML = txt;
+    e.target.style.cursor = 'pointer';       
 };
 
-deleter = (event) => {
-    event.target.textContent = null;
+deleter = (e) => {
+    e.target.innerHTML = null;
     about.innerHTML = '<i class="fas fa-question fa-3x">';
-    htmlcss.innerHTML = '<i class="fas fa-code fa-3x"></i>';
-    jscript.innerHTML = '<i class="fab fa-js-square fa-3x"></i>';
-    webtech.innerHTML= '<i class="fas fa-cogs fa-3x"></i>';
+    htmlcss.innerHTML = '<i class="fas fa-code fa-2x"></i>';
+    jscript.innerHTML = '<i class="fab fa-js-square fa-2x"></i>';
+    webtech.innerHTML= '<i class="fas fa-cogs fa-2x"></i>';
 };
 
+slideIn = (e) => {
+    let toSlide = document.getElementById(e)
+    var pos = 0;
+    const frame = () => {
+        if(mq.matches) {
+            if (pos == -600) {
+                clearInterval(interv);
+            } else {
+                pos -= 100; 
+                toSlide.style.top = pos + 'px'; 
+            }
+        } else {
+            if (pos == -700) {
+                clearInterval(interv);
+            } else {
+                pos -= 100; 
+                toSlide.style.top = pos + 'px'; 
+            }
+        }
+        
+    }  
+    var interv = setInterval(frame, 100);
+};
 
-// Event Listeners //
-main.addEventListener('mouseover', (event) => {
-    if (event.target == about) {
-        inserter(event);
-    } else if (event.target == htmlcss) {
-        inserter(event)
-    } else if (event.target == jscript) {
-        inserter(event)
-    } else if (event.target == webtech) {
-        inserter(event)
+slideOut = (e) => {
+    let toSlide = document.getElementById(e);
+    let pos;
+    if (mq.matches){
+        pos = -600;
+    } else {
+        pos = -700;
+    }
+    const frame = () => {
+        if (toSlide.style.top == '0px' || !toSlide.style.top) {
+          clearInterval(interv);
+        } else {
+            pos += 100; 
+            toSlide.style.top = pos + 'px'; 
+        } 
+    }  
+    var interv = setInterval(frame, 100);
+};
+
+/***  Event Listeners ***/
+main.addEventListener('mouseover', (e) => {
+    if (e.target == about) {
+        inserter(e);
+    } else if (e.target == htmlcss) {
+        inserter(e)
+    } else if (e.target == jscript) {
+        inserter(e)
+    } else if (e.target == webtech) {
+        inserter(e)
     }
 });
 
-main.addEventListener('mouseout', (event) => {
-    if (event.target == about){
-        deleter(event);
-    } else if (event.target == htmlcss){
-        deleter(event);
-    } else if (event.target == jscript){
-        deleter(event);
-    } else if (event.target == webtech){
-        deleter(event);
+main.addEventListener('mouseout', (e) => {
+    if (e.target == about){
+        deleter(e);
+    } else if (e.target == htmlcss){
+        deleter(e);
+    } else if (e.target == jscript){
+        deleter(e);
+    } else if (e.target == webtech){
+        deleter(e);
     }
 }); 
 
-// describe = () => {
-//     const txt = list[0];
-//     let i= 0;
-//     entering = () => {
-//         console.log(i);
-//         if (i < txt.length) {
-//           description.innerHTML += txt.charAt(i);
-//           i++;
-//           setTimeout(entering, speed);
-//         };
-//     };
+main.addEventListener('click', (e) => {
+    if(e.target == about) {
+        slideIn('about2');
+        slideOut('htmlcss2');
+        slideOut('javascript2');
+        slideOut('webtech2');
+    } else if(e.target == htmlcss) {
+        slideIn('htmlcss2');
+        slideOut('about2');
+        slideOut('javascript2');
+        slideOut('webtech2');
+    } else if(e.target == javascript) {
+        slideIn('javascript2');
+        slideOut('htmlcss2');
+        slideOut('about2');
+        slideOut('webtech2');
+    } else if(e.target == webtech) {
+        slideIn('webtech2');
+        slideOut('htmlcss2');
+        slideOut('javascript2');
+        slideOut('about2');
+    } else if(e.target == closing) {
+        slideOut('about2');
+    }
+});
 
-//     deleting = () => {
-//         i--;
-//         setTimeout(deleting, speed);
-//     };
-    
-//     entering();
-    
-// };
-
-// describe();
-
-document.addEventListener('DOMContentLoaded',function(event){
-    // array with texts to type in typewriter
-    var dataText = [
-        'Front-End Developer',
-        'Programmer',
+document.addEventListener('DOMContentLoaded',function(e){
+    // List of sentences
+    var _CONTENT = [ 
+        'Front-end Developer',
+        'Javascript Developer',
+        'Lifelong Learner',
         'React Developer',
-        'SEO Enthusiast',
         'Boardgame Enthusiast',
-        'Pug Lover',
-        'Single',
-        'Ready to Mingle'
-    ]
-    
-    // type one text in the typwriter
-    // keeps calling itself until the text is finished
-    function typeWriter(text, i, fnCallback) {
-      // chekc if text isn't finished yet
-      if (i < (text.length)) {
-        // add next character to description
-       document.getElementById("description").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
-  
-        // wait for a while and call this function again for next character
+        'Loves Pugs',
+        'Critical Thinker',
+        'Detail Oriented',
+        'Ball is life',
+        '"Walang matigas na tinapay sa mainit na kape"'
+    ];
+
+    // Current sentence being processed
+    var _PART = 0;
+
+    // Character number of the current sentence being processed 
+    var _PART_INDEX = 0;
+
+    // Holds the handle returned from setInterval
+    var _INTERVAL_VAL;
+
+    // Element that holds the text
+    var _ELEMENT = document.getElementById("description");
+
+    // Implements typing effect
+    function Type() { 
+    var text =  _CONTENT[_PART].substring(0, _PART_INDEX + 1);
+    _ELEMENT.innerHTML = text;
+    _PART_INDEX++;
+
+    // If full sentence has been displayed then start to delete the sentence after some time
+    if(text === _CONTENT[_PART]) {
+        clearInterval(_INTERVAL_VAL);
         setTimeout(function() {
-          typeWriter(text, i + 1, fnCallback)
-        }, 100);
-      }
-      // text finished, call callback if there is a callback function
-      else if (typeof fnCallback == 'function') {
-        // call callback after timeout
-        setTimeout(fnCallback, 700);
-      }
+            _INTERVAL_VAL = setInterval(Delete, 50);
+        }, 1000);
     }
-    // start a typewriter animation for a text in the dataText array
-     function StartTextAnimation(i) {
-       if (typeof dataText[i] == 'undefined'){
-          setTimeout(function() {
-            StartTextAnimation(0);
-          }, 20000);
-       }
-       // check if dataText[i] exists
-      if (i < dataText[i].length) {
-        // text exists! start typewriter animation
-       typeWriter(dataText[i], 0, function(){
-         // after callback (and whole text has been animated), start next text
-         StartTextAnimation(i + 1);
-       });
-      }
     }
-    // start the text animation
-    StartTextAnimation(0);
+
+    // Implements deleting effect
+    function Delete() {
+    var text =  _CONTENT[_PART].substring(0, _PART_INDEX - 1);
+    _ELEMENT.innerHTML = text;
+    _PART_INDEX--;
+
+    // If sentence has been deleted then start to display the next sentence
+    if(text === '') {
+        clearInterval(_INTERVAL_VAL);
+
+        // If last sentence then display the first one, else move to the next
+        if(_PART == (_CONTENT.length - 1))
+            _PART = 0;
+        else
+            _PART++;
+        _PART_INDEX = 0;
+
+        // Start to display the next sentence after some time
+        setTimeout(function() {
+            _INTERVAL_VAL = setInterval(Type, 100);
+        }, 200);
+    }
+    }
+
+    // Start the typing effect on load
+    _INTERVAL_VAL = setInterval(Type, 100);
   });
 
 
-  /* RESUME ANIMATION*/
+  /* RESUME' ANIMATION*/
