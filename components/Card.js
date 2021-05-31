@@ -19,7 +19,6 @@ export default function Card(props) {
       className={styles.card}
       onMouseEnter={() => setPop(true)}
       onMouseLeave={() => setPop(false)}
-      style={{ flexDirection: `${props.direction}` }}
     >
       <img src={props.image} style={pop ? boxShadow : null} />
       <div className={styles.info}>

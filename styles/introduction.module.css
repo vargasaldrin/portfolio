@@ -50,3 +50,13 @@
   font-size: 1.5rem;
   padding: 10px 20px;
 }
+
+@media (max-width: 425px) {
+  .introduction {
+    height: 600px;
+  }
+
+  .header {
+    font-size: 5rem;
+  }
+}

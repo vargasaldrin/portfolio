@@ -4,3 +4,9 @@
   flex-direction: column;
   background-color: #e1701a;
 }
+
+@media (max-width: 450px) {
+  .container main {
+    font-size: 12px;
+  }
+}

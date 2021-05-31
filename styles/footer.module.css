@@ -47,3 +47,25 @@
   width: 50px;
   cursor: pointer;
 }
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 25px 5%;
+  }
+
+  .box {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .box ul li {
+    font-size: 18px;
+    padding: 18px 0;
+  }
+
+  .icons img {
+    height: 25px;
+    width: 25px;
+  }
+}
